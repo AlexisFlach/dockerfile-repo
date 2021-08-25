@@ -1,11 +1,12 @@
 const express = require("express");
-// const cors = require("cors");
+
 const app = express();
+var cors = require('cors')
 
 
-// app.use(cors());
-app.use(express.urlencoded)
 
+app.use(cors())
+app.use(express.urlencoded({ extended: true }))
 const { Pool } = require("pg");
 
 const pgClient = new Pool({
@@ -15,6 +16,8 @@ const pgClient = new Pool({
   password: process.env.PGPASSWORD,
   port: process.env.PGPORT
 });
+
+
 
 pgClient.on("connect", (client) => {
   client
@@ -33,9 +36,9 @@ app.get("/users", async (req, res) => {
 
 app.post("/register", async (req, res) => {
   const {name} = req.body
-  res.send('inserting')
-  // pgClient.query("INSERT INTO users(name) VALUES($1)", [name]);
-  res.send({ working: true });
+  // res.send('inserting')
+  pgClient.query("INSERT INTO users(name) VALUES($1)", [name]);
+  // res.send({ working: true });
 });
 
 app.listen(5000, (err) => {
