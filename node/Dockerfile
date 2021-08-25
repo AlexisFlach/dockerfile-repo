@@ -1,5 +1,5 @@
 FROM node
-WORKDIR /app
+WORKDIR /THISISMYWORKDIR
 ENV port=5000
 EXPOSE 5000
 COPY ./package*.json .
