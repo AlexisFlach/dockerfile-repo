@@ -12,12 +12,14 @@ services:
       - "5000:5000"
   nginx:
     build: ./nginx
-    volumes:
-      - static:/static
+    # volumes:
+    #   - static:/static
     ports:
       - "80:80"
     depends_on: 
       - flask
+  supervisor:
+    build: ./supervisor
 
 volumes:
   static:
