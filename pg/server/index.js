@@ -3,8 +3,6 @@ const express = require("express");
 const app = express();
 var cors = require('cors')
 
-
-
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 const { Pool } = require("pg");
@@ -21,7 +19,7 @@ const pgClient = new Pool({
 
 pgClient.on("connect", (client) => {
   client
-    .query("CREATE TABLE IF NOT EXISTS users (name STRING)")
+    .query("CREATE TABLE IF NOT EXISTS users (id int, name string)")
     .catch((err) => console.error(err));
 });
 
@@ -31,14 +29,15 @@ app.get("/", async (req, res) => {
 app.get("/users", async (req, res) => {
   const users = await pgClient.query("SELECT * from users");
   res.send(users.rows);
-  res.send('hello world')
+ 
 });
 
 app.post("/register", async (req, res) => {
-  const {name} = req.body
+  const {id, name} = req.body
   // res.send('inserting')
-  pgClient.query("INSERT INTO users(name) VALUES($1)", [name]);
-  // res.send({ working: true });
+  console.log(id)
+  pgClient.query("INSERT INTO users(id, name) VALUES($1, $2)", [id, name]);
+  res.send({ working: true });
 });
 
 app.listen(5000, (err) => {

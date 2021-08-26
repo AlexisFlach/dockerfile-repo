@@ -33,6 +33,8 @@ Docker Client skicka information till Docker Server, och med informationen från
 
 #### Dockerfile instruktioner
 
+https://docs.docker.com/engine/reference/builder/
+
 De mest vanliga instruktionerna är:
 
 ```
@@ -169,9 +171,6 @@ INSERT INTO users(name) VALUES("Alex");
 ```
 SELECT * FROM users;
 ```
-
-
-
 Samma sak med Dockerfile.
 
 ```
@@ -187,6 +186,13 @@ docker build -t mysql-img .
 ```
 docker run -p 3306:3306 -d msy mysqld
 ```
+
+
+
+
+
+
+
 
 
 
