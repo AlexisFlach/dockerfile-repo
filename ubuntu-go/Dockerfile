@@ -1,4 +1,4 @@
-FROM golang:1.7.1 AS build-env
+FROM golang:1.7.1 
 
 COPY src /go/src
 
